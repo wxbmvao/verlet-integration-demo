@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Physics Engine</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h1>Verlet Integration Physics Engine</h1>
+
+      <div class="section-title">material presets:</div>
+
+      <div class="control-group material-select">
+        <label class="control-label">material type:</label>
+        <select id="material" onchange="app.updateMaterial()">
+          <option value="steel">steel (dense, hard)</option>
+          <option value="wood">wood (medium, bouncy)</option>
+          <option value="rubber">rubber (elastic, grippy)</option>
+          <option value="ice">ice (slippery, brittle)</option>
+          <option value="concrete">concrete (heavy, rough)</option>
+          <option value="custom">custom</option>
+        </select>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">world parameters:</div>
+
+      <div class="control-group">
+        <label class="control-label">gravity (m/s²):</label>
+        <input type="number" id="gravity" value="9.81" step="0.1" />
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">air density (kg/m³):</label>
+        <input type="number" id="airDensity" value="1.225" step="0.01" />
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">material properties:</div>
+
+      <div class="control-group">
+        <label class="control-label">density (kg/m³):</label>
+        <input type="number" id="density" value="7850" step="10" />
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">restitution (0-1):</label>
+        <input
+          type="number"
+          id="restitution"
+          value="0.4"
+          step="0.05"
+          min="0"
+          max="1"
+        />
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">static friction μs:</label>
+        <input type="number" id="staticFriction" value="0.74" step="0.01" />
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">dynamic friction μk:</label>
+        <input type="number" id="dynamicFriction" value="0.57" step="0.01" />
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">object settings:</div>
+
+      <div class="control-group">
+        <label class="control-label">shape type:</label>
+        <select id="shapeType">
+          <option value="circle">sphere</option>
+          <option value="box">box</option>
+          <option value="polygon">pentagon</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">size (meters):</label>
+        <input type="number" id="size" value="0.3" step="0.05" min="0.1" />
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">simulation:</div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="rotationEnabled" checked />
+        <label for="rotationEnabled">enable rotation</label>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="collisionsEnabled" checked />
+        <label for="collisionsEnabled">enable collisions</label>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="showVectors" />
+        <label for="showVectors">show velocity vectors</label>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="showContacts" />
+        <label for="showContacts">show contact points</label>
+      </div>
+
+      <div class="divider"></div>
+
+      <button onclick="app.addObject()">add object</button>
+      <button onclick="app.addMultiple()">add 5 objects</button>
+      <button onclick="app.createStack()">create tower</button>
+      <button onclick="app.createPyramid()">create pyramid</button>
+      <button onclick="app.shootObject()">shoot object</button>
+      <button onclick="app.togglePause()">pause / resume</button>
+      <button onclick="app.clearAll()">clear all</button>
+
+      <div class="stats">
+        <div class="stat-line">objects: <span id="objectCount">0</span></div>
+        <div class="stat-line">fps: <span id="fps">60</span></div>
+        <div class="stat-line">substeps: <span id="substeps">10</span></div>
+        <div class="stat-line">collisions: <span id="collisions">0</span></div>
+        <div class="stat-line">energy (J): <span id="energy">0</span></div>
+      </div>
+
+      <div id="credits">
+        <p>discord: wxvnxy</p>
+        <p>youtube: @wxvnxy</p>
+        <p>github: wxbmvao</p>
+        <br />
+        <p>Made by - Jason Kim</p>
+      </div>
+    </div>
+    </div>
+
+    <div class="canvas-container">
+      <canvas id="canvas" width="1100" height="700"></canvas>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
